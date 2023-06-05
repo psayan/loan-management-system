@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "eaaf3eda-472b-47e1-ad1a-f5683eeb18d8",
+		"name": "lms",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12902573",
+		"_collection_link": "https://tiger-app-team.postman.co/workspace/3972348f-9981-4fc7-848a-08468dcde631/collection/15825288-eaaf3eda-472b-47e1-ad1a-f5683eeb18d8?action=share&creator=12902573&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Create a customer which is not a superuser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"test_customer@gmail.com\",\n    \"password\": \"password@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get auth token for api requests",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Customer can not see other customers data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8000/api/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin can see customers data",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Customer requests for loans",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token  0017ea692ad177c457e7ce8b6bd59c0c2f8a588b",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 1500,\n    \"term\": 5\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/users/76c2b5df-b7bf-40f7-88aa-b9a6747cf510/loans",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"76c2b5df-b7bf-40f7-88aa-b9a6747cf510",
+						"loans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer can view his all loans",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token bcd1804101388bbdf144c194188c07d168581547",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8000/api/v1/users/76c2b5df-b7bf-40f7-88aa-b9a6747cf510/loans",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"76c2b5df-b7bf-40f7-88aa-b9a6747cf510",
+						"loans"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer try to pay without admin loan approval",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token bcd1804101388bbdf144c194188c07d168581547",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 600\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/users/76c2b5df-b7bf-40f7-88aa-b9a6747cf510/loans/ac3b3024-2c90-4a2e-80ec-19fac7f9d235",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"76c2b5df-b7bf-40f7-88aa-b9a6747cf510",
+						"loans",
+						"ac3b3024-2c90-4a2e-80ec-19fac7f9d235"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin can review loans",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token  0017ea692ad177c457e7ce8b6bd59c0c2f8a588b",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/users/76c2b5df-b7bf-40f7-88aa-b9a6747cf510/loans/ac3b3024-2c90-4a2e-80ec-19fac7f9d235/review",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"76c2b5df-b7bf-40f7-88aa-b9a6747cf510",
+						"loans",
+						"ac3b3024-2c90-4a2e-80ec-19fac7f9d235",
+						"review"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer can pay loans",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token bcd1804101388bbdf144c194188c07d168581547",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 600\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/v1/users/76c2b5df-b7bf-40f7-88aa-b9a6747cf510/loans/ac3b3024-2c90-4a2e-80ec-19fac7f9d235",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"76c2b5df-b7bf-40f7-88aa-b9a6747cf510",
+						"loans",
+						"ac3b3024-2c90-4a2e-80ec-19fac7f9d235"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
