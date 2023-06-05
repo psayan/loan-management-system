@@ -1,4 +1,5 @@
 Pre-Requisites: Python3.7 or any other higher python version
+
 Start up using virtualenv 
     - Start the virtualenv (based on your OS)
         For Linux only create virtualenv:
